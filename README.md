@@ -45,7 +45,7 @@ Most Islamic history platforms are:
 
 ### This project changes the model
 
-| Traditional Platforms | This Project |
+| Traditional Platforms | Tārīkh al-Islām |
 |----------------------|--------------|
 | Article-based | Data-driven |
 | Static text | Interactive visualization |
@@ -121,3 +121,4 @@ This project is released under the **MIT License**.
 
 **Irshad Hossain**  
 Student, Software Engineering
+
