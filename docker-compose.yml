@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    container_name: tarikh_backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend.Dockerfile
+    container_name: tarikh_frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+  db:
+    image: postgis/postgis:15-3.3
+    container_name: tarikh_db
+    restart: always
+    environment:
+      POSTGRES_DB: tarikh_db
+      POSTGRES_USER: tarikh_user
+      POSTGRES_PASSWORD: tarikh_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
