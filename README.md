@@ -12,6 +12,7 @@
   <img src="https://img.icons8.com/?size=40&id=x7XMNGh2vdqA&format=png&color=000000" />
   <img src="https://img.icons8.com/?size=40&id=LPmcJ9e0FU7K&format=png&color=000000" />
   <img src="https://img.icons8.com/?size=40&id=38561&format=png&color=000000" />
+  <img src="https://img.icons8.com/?size=50&id=LdUzF8b5sz2R&format=png&color=000000" />
 </p>
 
 > [!WARNING]
