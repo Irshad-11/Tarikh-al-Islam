@@ -1,3 +1,4 @@
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/Irshad-11/Documents/main/Tārīkh%20al-Islām-banner.png" alt="Tārīkh al-Islām Banner" />
 </p>
@@ -23,15 +24,16 @@
 
 ## What this project actually is
 
-This project is a **Temporal–Geospatial Knowledge Platform** for Islamic History. A system that lets people **see Islamic history instead of only reading it**.
+**Tārīkh al-Islām** is a **Temporal–Geospatial Knowledge Platform** focused on Islamic history.
 
-Users explore history through:
+Instead of reading long articles, users **explore history visually** through:
 
-- Timeline  
-- Interactive Map  
-- Sequential Historic Event  
+- 📅 Interactive timeline  
+- 🗺️ (Future) Map-based exploration  
+- 📖 Sequential historical events  
 
-Instead of scrolling long articles, users **navigate history visually**.
+The goal is to **see Islamic history**, not just read it.
+
 
 
 ## Why this project is different
@@ -47,7 +49,7 @@ Most Islamic history platforms are:
 ### This project changes the model
 
 | Traditional Platforms | Tārīkh al-Islām |
-|----------------------|--------------|
+|----------------------|----------------|
 | Article-based | Data-driven |
 | Static text | Interactive visualization |
 | Linear reading | Exploratory navigation |
@@ -58,68 +60,131 @@ Most Islamic history platforms are:
 
 
 
-## Estimated development time
+## System at a Glance (High-Level Architecture)
 
-### Phase 1 — Core system (MVP)
+```mermaid
+flowchart LR
+    PublicUser["Public User"] -->|View Events| Frontend
+    Contributor["Contributor"] -->|Submit Events| Frontend
+    Admin["Admin"] -->|Moderate & Manage| Frontend
 
-- Backend models + API → **10–14 days**
-- Admin panel → **7 days**
-- Timeline engine → **10 days**
-- Map integration → **7 days**
-- Timeline ↔ map sync logic → **5 days**
+    Frontend["React + Tailwind UI"] -->|REST API| Backend["Django + DRF"]
 
-**Total:** ~ **1 month**
+    Backend --> Database["PostgreSQL"]
+
+    Backend --> Auth["RBAC & Auth Logic"]
+```
+
+## Core Workflow Overview
+### Event Lifecycle
+
+```mermaid
+stateDiagram-v2
+    direction TB
+
+    [*] --> Draft : Contributor Creates
+    [*] --> Approved : Admin Direct Add
+    
+    Draft --> Pending : Submit for Review
+    
+    Pending --> Approved : Admin Approval
+    Pending --> Rejected : Admin Rejection
+    
+    Rejected --> Draft : Contributor Resubmits
+    
+    Approved --> DeletionRequested : Contributor Suggests Delete
+    Approved --> Deleted : Admin Direct Delete
+    
+    DeletionRequested --> Deleted : Admin Confirms Delete
+    DeletionRequested --> Approved : Admin Declines
+    
+    Deleted --> [*]
+
+    state Approved {
+        direction LR
+        Live --> Visible
+    }
+
+    note right of Pending : Admin Review Queue
+    note left of DeletionRequested : Removal Review
+```
+
+> [!NOTE]
+> For more information, see the [Detailed Documentation](https://github.com/Irshad-11/Tarikh-al-Islam/blob/main/docs/).
+
+## Technology Stack (MVP)
+
+| Layer    | Technology                       |
+| -------- | -------------------------------- |
+| Frontend | React, Tailwind CSS              |
+| Backend  | Django, Django REST Framework    |
+| Database | PostgreSQL                       |
+| Auth     | Role-Based Access Control (RBAC) |
+| DevOps   | Docker                           |
 
 
-### Phase 2 — Visualization polish
 
-- Animations  
-- Event clustering  
-- Filtering  
-- Performance tuning  
+## Estimated Development Timeline
 
-**+ 2 weeks**
+```mermaid
+gantt
+    title Tarikh al-Islam MVP Timeline
+    dateFormat YYYY-MM-DD
+
+    section Planning
+    Documentation and Design :done, 2026-01-01, 14d
+
+    section Backend
+    Backend Development      :active, 2026-01-15, 21d
+
+    section Frontend
+    Frontend Development     :2026-02-05, 7d
+
+    section Database
+    Database Implementation  :2026-02-12, 14d
+
+    section Integration
+    Integration and Debugging:2026-02-26, 14d
+
+    section DevOps
+    Testing and Docker       :2026-03-12, 14d
+
+    section Release
+    MVP Release              :milestone, 2026-03-26, 1d
+
+```
 
 
-### Phase 3 — Advanced features
-
-- Region filters  
-- Search  
-- Routes / movement tracking  
-- Analytics  
-
-**+ 2–4 weeks**
-
-### Realistic total
-
-> **3–4 months**
 
 ## Sources
 
 Historical data is referenced and cross-checked using publicly available resources:
 
-- **Wikipedia**  
-- **Al-Islam.org**  
-- **MuslimHeritage.com**  
-- **Internet Archive (Islamic history texts)**  
-- **Qatar Digital Library**
+* **Wikipedia**
+* **Al-Islam.org**
+* **MuslimHeritage.com**
+* **Internet Archive (Islamic history texts)**
+* **Qatar Digital Library**
 
 > [!NOTE]
-> Sources are used for reference and verification only.  
+> Sources are used for reference and verification only.
 > Data is curated manually.
+
 
 
 ## License
 
 This project is released under the **MIT License**.
 
-- Free to use and modify
-- Attribution appreciated
-- Source materials follow their respective licenses
+* Free to use and modify
+* Attribution appreciated
+* Source materials follow their respective licenses
+
 
 
 ## Developer
 
-**Irshad Hossain**  
+**Irshad Hossain**
 Student, Software Engineering
+University of Frontier Technology, Bangladesh
 
