@@ -12,7 +12,7 @@
 **Author:** Irshad Hossain
 **Organization:** University of Frontier Technology, Bangladesh.
 **Date:** January 14, 2026
-**Version:** 1.0.0
+**Version:** 1.0.1
 
 ### Revision History
 
@@ -21,6 +21,7 @@ The following table tracks the development and modifications of this document in
 | Date | Version | Description | Author |
 | :--- | :--- | :--- | :--- |
 | 2026-01-14 | 1.0.0 | Initial MVP Requirement Draft | Irshad |
+| 2026-01-14 | 1.0.1 | Added requirements for event deletion | Irshad |
 
 
 ## 1. Introduction
@@ -54,8 +55,8 @@ Tārīkh al-Islām is a web-based application developed using a decoupled archit
 | User Class  | Description                                                                   |
 | ----------- | ----------------------------------------------------------------------------- |
 | Public User | Users who can view approved historical events without authentication          |
-| Contributor | Registered users who can submit and manage historical events pending approval |
-| Admin       | Privileged users who manage events, approvals, and contributor accounts       |
+| Contributor | Registered users can submit, manage, and suggest deletion of historical events. |
+| Admin       | Privileged users can create, update, and delete events, approvals, and contributor accounts.       |
 
 
 
@@ -111,29 +112,35 @@ The system shall allow contributors to edit or delete their own events prior to 
 **FR-12**
 The system shall allow contributors to view the approval status of their submitted events.
 
+**FR-13**
+The system shall allow contributors to suggest deletion of any historical events, subject to approval.
+
 
 
 ### 3.3 Administrator Requirements
 
-**FR-13**
+**FR-14**
 The system shall allow administrators to access an administrative dashboard through authentication.
 
-**FR-14**
+**FR-15**
 The system shall allow administrators to view all submitted historical events.
 
-**FR-15**
+**FR-16**
 The system shall allow administrators to approve pending historical events.
 
-**FR-16**
+**FR-17**
 The system shall allow administrators to reject historical events and provide a rejection note.
 
-**FR-17**
+**FR-18**
 The system shall allow administrators to create historical events that are automatically approved.
 
-**FR-18**
+**FR-19**
 The system shall allow administrators to edit or delete any existing historical event.
 
-**FR-19**
+**FR-20**
+The system shall allow Administrators to confirm or reverse deletion suggestions initiated by Contributors.
+
+**FR-21**
 The system shall allow administrators to suspend or reactivate contributor accounts.
 
 

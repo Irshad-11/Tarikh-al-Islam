@@ -15,7 +15,7 @@
 **Author:** Irshad Hossain
 **Organization:** University of Frontier Technology, Bangladesh.
 **Date:** January 14, 2026
-**Version:** 1.0.0
+**Version:** 1.0.1
 
 ### Revision History
 
@@ -24,6 +24,7 @@ The following table tracks the development and modifications of this document in
 | Date | Version | Description | Author |
 | :--- | :--- | :--- | :--- |
 | 2026-01-14 | 1.0.0 | Initial MVP Requirement Draft | Irshad |
+| 2026-01-14 | 1.0.1 | Drafted section on event deletion | Irshad |
 
 
 # 1. Introduction
@@ -252,6 +253,33 @@ sequenceDiagram
     BE->>DB: Save Status
 ```
 
+## 5.4 Event Deletion & Cleanup Flow (Admin)
+
+```mermaid
+sequenceDiagram
+    participant Admin
+    participant FE as Frontend
+    participant BE as Backend
+    participant DB as Database 
+
+    Admin->>FE: Access Moderation Dashboard
+    FE->>BE: GET /api/moderation/deletions/
+    BE->>BE: Validate Admin Permissions
+    BE->>DB: Fetch 'DeletionRequested' Records
+    DB-->>BE: Event Data
+    BE-->>FE: Populate Deletion Queue
+    
+    Admin->>FE: Confirm/Reject Deletion
+    
+    FE->>BE: POST /api/moderation/resolve-delete/
+    Note over BE: Logic: If Approved -> Status='DELETED'<br/>If Rejected -> Status='APPROVED'
+    
+    BE->>DB: Persist State Transition
+    DB-->>BE: Transaction Confirmed
+    
+    BE-->>FE: Return Sync Response
+    FE-->>Admin: Update Dashboard UI
+```
 
 
 # 6. Deployment Architecture (High-Level)
