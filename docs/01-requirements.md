@@ -9,10 +9,10 @@
   ---
 </div>
 
-**Author:** Irshad Hossain
-**Organization:** University of Frontier Technology, Bangladesh.
-**Date:** January 14, 2026
-**Version:** 1.0.0
+**Author:** Irshad Hossain <br>
+**Organization:** University of Frontier Technology, Bangladesh. <br>
+**Date:** January 14, 2026 <br>
+**Version:** 1.0.0 <br>
 
 ### Revision History
 
