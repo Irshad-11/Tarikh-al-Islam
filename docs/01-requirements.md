@@ -9,6 +9,20 @@
   ---
 </div>
 
+**Author:** Irshad Hossain
+**Organization:** University of Frontier Technology, Bangladesh.
+**Date:** January 14, 2026
+**Version:** 1.0.0
+
+### Revision History
+
+The following table tracks the development and modifications of this document in accordance with IEEE documentation standards.
+
+| Date | Version | Description | Author |
+| :--- | :--- | :--- | :--- |
+| 2026-01-14 | 1.0.0 | Initial MVP Requirement Draft | Irshad |
+
+
 ## 1. Introduction
 
 ### 1.1 Purpose
