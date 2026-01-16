@@ -11,7 +11,7 @@
 **Author:** Irshad Hossain
 **Organization:** University of Frontier Technology, Bangladesh
 **Date:** January 14, 2026
-**Version:** 1.0.0
+**Version:** 1.1.0
 
 
 
@@ -20,6 +20,7 @@
 | Date       | Version | Description                 | Author |
 | ---------- | ------- | --------------------------- | ------ |
 | 2026-01-14 | 1.0.0   | Initial MVP Database Design | Irshad |
+| 2026-01-16 | 1.1.0   | Added timeline optimization fields to events| Irshad |
 
 
 
@@ -43,6 +44,8 @@ The database is designed to:
 * Traceability of all content changes
 * Support for future map and timeline engines
 * Compliance with academic and real-world engineering standards
+* Optimized event rendering for timeline and search previews
+
 
 
 
@@ -91,14 +94,20 @@ erDiagram
     EVENT {
         int id PK
         string title
+        text summary
         text description_md
         string location_name
         float latitude
         float longitude
+
         int start_year_ad
         int end_year_ad
         int start_year_hijri
         int end_year_hijri
+
+        int importance_level
+        int visibility_rank
+
         string status
         int created_by FK
         int updated_by FK
@@ -106,7 +115,15 @@ erDiagram
         datetime updated_at
         datetime approved_at
     }
+
 ```
+
+**Timeline Optimization Fields:**
+
+* `summary` provides a short, readable overview used in timeline cards and search previews, reducing the need to load full descriptions.
+* `importance_level` represents the historical significance of an event on a scale of 1 (minor) to 5 (major), enabling timeline density control and future analytics.
+* `visibility_rank` determines display priority when multiple events occur in the same year, ensuring consistent and meaningful ordering.
+
 
 **Status Lifecycle:**
 
@@ -202,7 +219,8 @@ erDiagram
 ## 5. Relationship Summary and Table Connectivity
 
 This section explains how all database tables are **logically related and physically connected** within the Tārīkh al-Islām system.
-The relationships are designed to reflect **real-world historical data curation**, where contributors submit content, administrators moderate it, and all actions remain traceable.
+The relationships are designed to reflect **real-world historical data curation**, where contributors submit content, administrators moderate it, and all actions remain traceable. Timeline-related attributes stored in the events table enable efficient chronological ordering and visual prioritization without altering relational structure.
+
 
 ### 5.1 Relationship Overview (Descriptive)
 
@@ -283,7 +301,8 @@ erDiagram
     EVENTS {
         int id PK "101"
         string title "Battle_of_Badr"
-        text description_md "First major battle in Islamic history"
+        text summary "Decisive early battle that established the Muslim community's military strength."
+        text description_md "First major battle in Islamic history between Muslims of Madinah and Quraysh of Makkah."
         string location_name "Badr, Madinah"
         float latitude "23.78"
         float longitude "38.79"
@@ -291,6 +310,8 @@ erDiagram
         int end_year_ad "624"
         int start_year_hijri "2"
         int end_year_hijri "2"
+        int importance_level "5"
+        int visibility_rank "1"
         string status "APPROVED"
         int created_by FK "12"
         datetime created_at "2025-11-05"
@@ -298,7 +319,12 @@ erDiagram
         datetime approved_at "2026-01-09"
     }
 
+
 ```
+
+### Why These Fields Matter in Practice
+
+By storing timeline-specific metadata directly in the events table, the system avoids expensive runtime calculations and enables fast rendering of large historical datasets. This design supports future features such as timeline clustering, importance-based filtering, and analytical insights.
 
 
 
