@@ -1,3 +1,89 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ────────────────────────────────────────────────
+   Custom properties (variables) for colors & reusable values
+───────────────────────────────────────────────── */
+:root {
+  --bg-primary: #062C21;           /* islamic-green */
+  --bg-deep: #041F18;              /* deep-green */
+  --text-primary: #F8F1E9;         /* offwhite */
+  --text-secondary: #E0D9C9;       /* stone */
+  --accent-gold: #D4AF37;          /* gold */
+  --accent-gold-dark: #B8972E;     /* gold-dark */
+  --gold-opacity-30: rgba(212, 175, 55, 0.3);
+  --gold-opacity-40: rgba(212, 175, 55, 0.4);
+  --gold-opacity-10: rgba(212, 175, 55, 0.1);
+}
+
+/* ────────────────────────────────────────────────
+   Global base styles — no @apply for custom colors
+───────────────────────────────────────────────── */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: theme('fontFamily.sans');
+  
+  background-image: 
+    radial-gradient(circle at 10% 20%, var(--gold-opacity-03) 0%, transparent 25%),
+    radial-gradient(circle at 90% 80%, var(--gold-opacity-02) 0%, transparent 35%);
+  background-attachment: fixed;
+}
+
+/* Headings — use theme() for font, direct var for color */
+h1, h2, h3, h4, h5, h6 {
+  font-family: theme('fontFamily.serif');
+  color: var(--accent-gold);
+  letter-spacing: 0.025em; /* tracking-wide equivalent */
+}
+
+/* Prose base */
+.prose {
+  color: var(--text-secondary);
+  max-width: none;
+}
+
+/* Prose headings with gold divider look */
+.prose h1,
+.prose h2 {
+  border-bottom: 1px solid var(--gold-opacity-30);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Custom gold divider utility class */
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--gold-opacity-40),
+    transparent
+  );
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ────────────────────────────────────────────────
+   Layered overrides for prose (markdown rendering)
+───────────────────────────────────────────────── */
+@layer base {
+  .prose-gold :where(h1, h2, h3, h4, h5, h6) {
+    color: var(--accent-gold);
+  }
+  .prose-gold :where(a) {
+    color: var(--accent-gold);
+  }
+  .prose-gold :where(a:hover) {
+    text-decoration: underline;
+  }
+}
+
+/* Optional: make links in prose slightly more visible */
+.prose a {
+  transition: color 0.2s ease;
+}
+.prose a:hover {
+  color: var(--accent-gold-dark);
+}
